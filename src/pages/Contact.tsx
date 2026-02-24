@@ -4,12 +4,34 @@ import { useTranslation } from 'react-i18next'
 export default function Contact() {
     const { t } = useTranslation()
     const [submitted, setSubmitted] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState('')
     const [form, setForm] = useState({ name: '', email: '', company: '', message: '' })
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
-        // In production, integrate with EmailJS / Formspree / etc.
-        setSubmitted(true)
+        setLoading(true)
+        setError('')
+
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(form),
+            })
+
+            const data = await res.json()
+
+            if (!res.ok || !data.success) {
+                throw new Error(data.error || '전송에 실패했습니다.')
+            }
+
+            setSubmitted(true)
+        } catch (err) {
+            setError(err instanceof Error ? err.message : '오류가 발생했습니다. 다시 시도해 주세요.')
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
@@ -83,6 +105,12 @@ export default function Contact() {
                                 </div>
                             ) : (
                                 <form onSubmit={handleSubmit} className="glass-card p-8 lg:p-10 space-y-6">
+                                    {error && (
+                                        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+                                            {error}
+                                        </div>
+                                    )}
+
                                     <div className="grid sm:grid-cols-2 gap-6">
                                         <div>
                                             <label htmlFor="name" className="block text-white text-sm font-medium mb-2">{t('contact.label_name')}</label>
@@ -94,6 +122,7 @@ export default function Contact() {
                                                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                                                 className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-400/50 focus:ring-1 focus:ring-brand-400/25 transition-all"
                                                 placeholder={t('contact.placeholder_name')}
+                                                disabled={loading}
                                             />
                                         </div>
                                         <div>
@@ -106,6 +135,7 @@ export default function Contact() {
                                                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                                                 className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-400/50 focus:ring-1 focus:ring-brand-400/25 transition-all"
                                                 placeholder={t('contact.placeholder_email')}
+                                                disabled={loading}
                                             />
                                         </div>
                                     </div>
@@ -118,6 +148,7 @@ export default function Contact() {
                                             onChange={(e) => setForm({ ...form, company: e.target.value })}
                                             className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-400/50 focus:ring-1 focus:ring-brand-400/25 transition-all"
                                             placeholder={t('contact.placeholder_company')}
+                                            disabled={loading}
                                         />
                                     </div>
                                     <div>
@@ -130,13 +161,25 @@ export default function Contact() {
                                             onChange={(e) => setForm({ ...form, message: e.target.value })}
                                             className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-400/50 focus:ring-1 focus:ring-brand-400/25 transition-all resize-none"
                                             placeholder={t('contact.placeholder_message')}
+                                            disabled={loading}
                                         />
                                     </div>
                                     <button
                                         type="submit"
-                                        className="w-full py-4 rounded-xl bg-gradient-to-r from-brand-500 to-brand-400 text-white font-semibold shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 hover:scale-[1.02] transition-all duration-300"
+                                        disabled={loading}
+                                        className="w-full py-4 rounded-xl bg-gradient-to-r from-brand-500 to-brand-400 text-white font-semibold shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                                     >
-                                        {t('contact.submit')}
+                                        {loading ? (
+                                            <span className="inline-flex items-center gap-2">
+                                                <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                                                </svg>
+                                                전송 중...
+                                            </span>
+                                        ) : (
+                                            t('contact.submit')
+                                        )}
                                     </button>
                                 </form>
                             )}
