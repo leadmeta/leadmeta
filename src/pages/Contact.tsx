@@ -1,6 +1,8 @@
 import { useState, type FormEvent } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export default function Contact() {
+    const { t } = useTranslation()
     const [submitted, setSubmitted] = useState(false)
     const [form, setForm] = useState({ name: '', email: '', company: '', message: '' })
 
@@ -18,13 +20,12 @@ export default function Contact() {
                 <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-brand-500/5 rounded-full blur-[120px]" />
 
                 <div className="relative max-w-4xl mx-auto px-6 lg:px-8 text-center animate-fade-in-up">
-                    <span className="text-brand-400 font-medium text-sm uppercase tracking-widest">Contact Us</span>
+                    <span className="text-brand-400 font-medium text-sm uppercase tracking-widest">{t('contact.subtitle')}</span>
                     <h1 className="text-4xl lg:text-5xl font-display font-bold text-white mt-4 mb-6">
-                        문의하기
+                        {t('contact.title')}
                     </h1>
                     <p className="text-slate-400 text-lg leading-relaxed max-w-2xl mx-auto">
-                        궁금한 점이 있으시거나 서비스에 관심이 있으시다면 언제든 연락해 주세요.
-                        빠른 시간 내에 답변 드리겠습니다.
+                        {t('contact.desc')}
                     </p>
                 </div>
             </section>
@@ -43,8 +44,8 @@ export default function Contact() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                     </svg>
                                 </div>
-                                <h3 className="text-white font-bold mb-1">이메일</h3>
-                                <p className="text-slate-400 text-sm">contact@leadmeta.xyz</p>
+                                <h3 className="text-white font-bold mb-1">{t('contact.email_title')}</h3>
+                                <p className="text-slate-400 text-sm">{t('contact.email_value')}</p>
                             </div>
 
                             <div className="glass-card p-6">
@@ -53,8 +54,8 @@ export default function Contact() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                                     </svg>
                                 </div>
-                                <h3 className="text-white font-bold mb-1">웹사이트</h3>
-                                <p className="text-slate-400 text-sm">www.leadmeta.xyz</p>
+                                <h3 className="text-white font-bold mb-1">{t('contact.web_title')}</h3>
+                                <p className="text-slate-400 text-sm">{t('contact.web_value')}</p>
                             </div>
 
                             <div className="glass-card p-6">
@@ -63,8 +64,8 @@ export default function Contact() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 </div>
-                                <h3 className="text-white font-bold mb-1">응답 시간</h3>
-                                <p className="text-slate-400 text-sm">영업일 기준 24시간 이내</p>
+                                <h3 className="text-white font-bold mb-1">{t('contact.response_title')}</h3>
+                                <p className="text-slate-400 text-sm">{t('contact.response_value')}</p>
                             </div>
                         </div>
 
@@ -77,14 +78,14 @@ export default function Contact() {
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                         </svg>
                                     </div>
-                                    <h3 className="text-white text-2xl font-bold mb-3">문의가 접수되었습니다</h3>
-                                    <p className="text-slate-400">빠른 시간 내에 답변 드리겠습니다. 감사합니다!</p>
+                                    <h3 className="text-white text-2xl font-bold mb-3">{t('contact.success_title')}</h3>
+                                    <p className="text-slate-400">{t('contact.success_desc')}</p>
                                 </div>
                             ) : (
                                 <form onSubmit={handleSubmit} className="glass-card p-8 lg:p-10 space-y-6">
                                     <div className="grid sm:grid-cols-2 gap-6">
                                         <div>
-                                            <label htmlFor="name" className="block text-white text-sm font-medium mb-2">이름 *</label>
+                                            <label htmlFor="name" className="block text-white text-sm font-medium mb-2">{t('contact.label_name')}</label>
                                             <input
                                                 id="name"
                                                 type="text"
@@ -92,11 +93,11 @@ export default function Contact() {
                                                 value={form.name}
                                                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                                                 className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-400/50 focus:ring-1 focus:ring-brand-400/25 transition-all"
-                                                placeholder="홍길동"
+                                                placeholder={t('contact.placeholder_name')}
                                             />
                                         </div>
                                         <div>
-                                            <label htmlFor="email" className="block text-white text-sm font-medium mb-2">이메일 *</label>
+                                            <label htmlFor="email" className="block text-white text-sm font-medium mb-2">{t('contact.label_email')}</label>
                                             <input
                                                 id="email"
                                                 type="email"
@@ -104,23 +105,23 @@ export default function Contact() {
                                                 value={form.email}
                                                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                                                 className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-400/50 focus:ring-1 focus:ring-brand-400/25 transition-all"
-                                                placeholder="email@example.com"
+                                                placeholder={t('contact.placeholder_email')}
                                             />
                                         </div>
                                     </div>
                                     <div>
-                                        <label htmlFor="company" className="block text-white text-sm font-medium mb-2">회사명</label>
+                                        <label htmlFor="company" className="block text-white text-sm font-medium mb-2">{t('contact.label_company')}</label>
                                         <input
                                             id="company"
                                             type="text"
                                             value={form.company}
                                             onChange={(e) => setForm({ ...form, company: e.target.value })}
                                             className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-400/50 focus:ring-1 focus:ring-brand-400/25 transition-all"
-                                            placeholder="(선택사항)"
+                                            placeholder={t('contact.placeholder_company')}
                                         />
                                     </div>
                                     <div>
-                                        <label htmlFor="message" className="block text-white text-sm font-medium mb-2">메시지 *</label>
+                                        <label htmlFor="message" className="block text-white text-sm font-medium mb-2">{t('contact.label_message')}</label>
                                         <textarea
                                             id="message"
                                             required
@@ -128,14 +129,14 @@ export default function Contact() {
                                             value={form.message}
                                             onChange={(e) => setForm({ ...form, message: e.target.value })}
                                             className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-400/50 focus:ring-1 focus:ring-brand-400/25 transition-all resize-none"
-                                            placeholder="문의 내용을 입력해 주세요..."
+                                            placeholder={t('contact.placeholder_message')}
                                         />
                                     </div>
                                     <button
                                         type="submit"
                                         className="w-full py-4 rounded-xl bg-gradient-to-r from-brand-500 to-brand-400 text-white font-semibold shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 hover:scale-[1.02] transition-all duration-300"
                                     >
-                                        문의 보내기
+                                        {t('contact.submit')}
                                     </button>
                                 </form>
                             )}

@@ -23,43 +23,6 @@ function useReveal() {
     return ref
 }
 
-/* ── Services Data ──────────────────────────────── */
-const services = [
-    {
-        icon: (
-            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-        ),
-        title: '키워드 분석',
-        subtitle: 'About Keyword',
-        desc: '정밀한 키워드 분석으로 검색 트렌드와 경쟁 현황을 파악하여 콘텐츠 전략을 수립합니다.',
-        link: 'https://www.aboutkeyword.com',
-    },
-    {
-        icon: (
-            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-            </svg>
-        ),
-        title: '블로그 네트워크',
-        subtitle: 'Blog Network',
-        desc: '이커머스, 파이낸스, 개발, 코딩 등 10여 개 분야의 수익형 블로그를 전문적으로 운영합니다.',
-        link: '/services',
-    },
-    {
-        icon: (
-            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-            </svg>
-        ),
-        title: '광고 & 마케팅',
-        subtitle: 'Ads & Marketing',
-        desc: '데이터 기반의 마케팅 전략과 광고 대행으로 비즈니스 성장을 가속화합니다.',
-        link: '/services',
-    },
-]
-
 export default function Home() {
     const { t } = useTranslation()
     const statsRef = useReveal()
@@ -67,10 +30,46 @@ export default function Home() {
     const ctaRef = useReveal()
 
     const translatedStats = [
-        { value: '10+', label: t('home.stats_blogs'), desc: '다양한 주제의 수익형 블로그' },
-        { value: '100K+', label: t('home.stats_keywords'), desc: '어바웃키워드를 통한 키워드 분석' },
-        { value: '5+', label: t('home.stats_fields'), desc: '이커머스, 파이낸스, 개발 등' },
-        { value: '24/7', label: t('home.stats_uptime'), desc: '365일 무중단 서비스' },
+        { value: '10+', label: t('home.stats_blogs'), desc: t('home.stats_blogs_desc') },
+        { value: '100K+', label: t('home.stats_keywords'), desc: t('home.stats_keywords_desc') },
+        { value: '5+', label: t('home.stats_fields'), desc: t('home.stats_fields_desc') },
+        { value: '24/7', label: t('home.stats_uptime'), desc: t('home.stats_uptime_desc') },
+    ]
+
+    const services = [
+        {
+            icon: (
+                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            ),
+            title: t('home.service1_title'),
+            subtitle: t('home.service1_subtitle'),
+            desc: t('home.service1_desc'),
+            link: 'https://www.aboutkeyword.com',
+        },
+        {
+            icon: (
+                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                </svg>
+            ),
+            title: t('home.service2_title'),
+            subtitle: t('home.service2_subtitle'),
+            desc: t('home.service2_desc'),
+            link: '/services',
+        },
+        {
+            icon: (
+                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+            ),
+            title: t('home.service3_title'),
+            subtitle: t('home.service3_subtitle'),
+            desc: t('home.service3_desc'),
+            link: '/services',
+        },
     ]
 
     return (
@@ -128,15 +127,14 @@ export default function Home() {
                             </div>
                         </div>
 
-                        {/* Right Visual - Replaced icon with a stylized brand visual using the logo */}
+                        {/* Right Visual */}
                         <div className="hidden lg:flex items-center justify-center">
                             <div className="relative">
-                                {/* Floating glow */}
                                 <div className="absolute inset-0 bg-brand-500/20 rounded-3xl blur-3xl animate-pulse" />
                                 <div className="relative glass-card p-12 rounded-3xl animate-float border border-white/10">
                                     <div className="w-40 h-40 mx-auto flex items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl shadow-2xl border border-white/5">
                                         <img
-                                            src="/LeadMeta_logo.webp"
+                                            src="/image/LeadMeta_logo.webp"
                                             alt="LeadMeta"
                                             className="w-32 drop-shadow-2xl"
                                         />
@@ -213,7 +211,7 @@ export default function Home() {
                                     <p className="text-brand-400/60 text-sm font-medium mb-3">{s.subtitle}</p>
                                     <p className="text-slate-400 text-sm leading-relaxed">{s.desc}</p>
                                     <div className="mt-5 text-brand-400 text-sm font-medium flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        자세히 보기
+                                        {t('home.view_more')}
                                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                         </svg>
@@ -232,7 +230,7 @@ export default function Home() {
                                     <p className="text-brand-400/60 text-sm font-medium mb-3">{s.subtitle}</p>
                                     <p className="text-slate-400 text-sm leading-relaxed">{s.desc}</p>
                                     <div className="mt-5 text-brand-400 text-sm font-medium flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        자세히 보기
+                                        {t('home.view_more')}
                                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                         </svg>
@@ -268,7 +266,7 @@ export default function Home() {
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-white/10 text-white font-medium hover:bg-white/5 transition-all duration-300"
                         >
-                            어바웃키워드 방문
+                            {t('home.cta_visit')}
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                             </svg>

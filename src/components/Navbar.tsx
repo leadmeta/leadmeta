@@ -57,7 +57,7 @@ export default function Navbar() {
                     {/* Logo - Updated to only use LeadMeta_logo.webp as per user request */}
                     <Link to="/" className="flex items-center h-full group">
                         <img
-                            src="/LeadMeta_logo.webp"
+                            src="/image/LeadMeta_logo.webp"
                             alt="LeadMeta"
                             className="h-8 transition-all duration-300 group-hover:opacity-80 group-hover:scale-105"
                         />

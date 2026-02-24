@@ -28,7 +28,7 @@ export default function Footer() {
                     <div className="md:col-span-1">
                         <Link to="/" className="flex items-center gap-3 mb-5">
                             {/* Removed LeadMeta_icon.webp as per user request */}
-                            <img src="/LeadMeta_logo.webp" alt="LeadMeta" className="h-7" />
+                            <img src="/image/LeadMeta_logo.webp" alt="LeadMeta" className="h-7" />
                         </Link>
                         <p className="text-slate-400 text-sm leading-relaxed">
                             {t('footer.description')}

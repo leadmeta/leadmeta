@@ -26,6 +26,4 @@ dist-ssr
 .env
 
 # Project specific
-public/LeadMeta_icon.webp
-public/LeadMeta_logo.webp
 screenshot.png
