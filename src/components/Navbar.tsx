@@ -59,7 +59,7 @@ export default function Navbar() {
                         <img
                             src="/image/LeadMeta_logo.webp"
                             alt="LeadMeta"
-                            className="h-8 transition-all duration-300 group-hover:opacity-80 group-hover:scale-105"
+                            className="h-10 transition-all duration-300 group-hover:opacity-80 group-hover:scale-105"
                         />
                     </Link>
 
@@ -115,12 +115,6 @@ export default function Navbar() {
                             </div>
                         </div>
 
-                        <Link
-                            to="/contact"
-                            className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-500 to-brand-400 text-white text-sm font-semibold shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 hover:scale-105 transition-all duration-300"
-                        >
-                            {t('nav.cta')}
-                        </Link>
                         <button
                             onClick={() => setIsOpen(!isOpen)}
                             className="md:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
@@ -157,12 +151,6 @@ export default function Navbar() {
                         </Link>
                     ))}
                     <div className="flex items-center justify-between pt-4 gap-3">
-                        <Link
-                            to="/contact"
-                            className="flex-1 px-4 py-3 rounded-xl bg-gradient-to-r from-brand-500 to-brand-400 text-white text-sm font-semibold text-center"
-                        >
-                            {t('nav.cta')}
-                        </Link>
                         <div className="flex px-1 gap-2 flex-col sm:flex-row w-full sm:w-auto mt-2 sm:mt-0">
                             <button
                                 onClick={() => changeLanguage('ko')}
