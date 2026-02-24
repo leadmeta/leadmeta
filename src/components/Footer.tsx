@@ -1,22 +1,25 @@
 import { Link } from 'react-router-dom'
-
-const footerLinks = {
-    services: [
-        { label: '어바웃키워드', href: 'https://www.aboutkeyword.com', external: true },
-        { label: '블로그 네트워크', to: '/services' },
-        { label: '마케팅 대행', to: '/services' },
-    ],
-    company: [
-        { label: '회사 소개', to: '/about' },
-        { label: '문의하기', to: '/contact' },
-    ],
-    legal: [
-        { label: '이용약관', to: '/terms' },
-        { label: '개인정보처리방침', to: '/privacy' },
-    ],
-}
+import { useTranslation } from 'react-i18next'
 
 export default function Footer() {
+    const { t } = useTranslation()
+
+    const footerLinks = {
+        services: [
+            { label: '어바웃키워드', href: 'https://www.aboutkeyword.com', external: true },
+            { label: t('nav.blog'), to: '/services/blog-network' },
+            { label: t('nav.marketing'), to: '/services/marketing-agency' },
+        ],
+        company: [
+            { label: t('nav.about'), to: '/about' },
+            { label: t('nav.contact'), to: '/contact' },
+        ],
+        legal: [
+            { label: t('footer.terms'), to: '/terms' },
+            { label: t('footer.privacy'), to: '/privacy' },
+        ],
+    }
+
     return (
         <footer className="bg-slate-950 border-t border-white/5">
             <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
@@ -24,18 +27,17 @@ export default function Footer() {
                     {/* Brand */}
                     <div className="md:col-span-1">
                         <Link to="/" className="flex items-center gap-3 mb-5">
-                            <img src="/LeadMeta_icon.webp" alt="LeadMeta" className="h-10 w-10 rounded-lg" />
+                            {/* Removed LeadMeta_icon.webp as per user request */}
                             <img src="/LeadMeta_logo.webp" alt="LeadMeta" className="h-7" />
                         </Link>
                         <p className="text-slate-400 text-sm leading-relaxed">
-                            마케팅과 데이터의 융합.<br />
-                            디지털 세상에서 비즈니스의 성장을 이끕니다.
+                            {t('footer.description')}
                         </p>
                     </div>
 
                     {/* Services */}
                     <div>
-                        <h4 className="text-white font-semibold text-sm mb-4 tracking-wide uppercase">서비스</h4>
+                        <h4 className="text-white font-semibold text-sm mb-4 tracking-wide uppercase">{t('footer.services')}</h4>
                         <ul className="space-y-3">
                             {footerLinks.services.map((link) =>
                                 'external' in link && link.external ? (
@@ -63,7 +65,7 @@ export default function Footer() {
 
                     {/* Company */}
                     <div>
-                        <h4 className="text-white font-semibold text-sm mb-4 tracking-wide uppercase">회사</h4>
+                        <h4 className="text-white font-semibold text-sm mb-4 tracking-wide uppercase">{t('footer.company')}</h4>
                         <ul className="space-y-3">
                             {footerLinks.company.map((link) => (
                                 <li key={link.label}>
@@ -77,7 +79,7 @@ export default function Footer() {
 
                     {/* Legal */}
                     <div>
-                        <h4 className="text-white font-semibold text-sm mb-4 tracking-wide uppercase">법적 고지</h4>
+                        <h4 className="text-white font-semibold text-sm mb-4 tracking-wide uppercase">{t('footer.legal')}</h4>
                         <ul className="space-y-3">
                             {footerLinks.legal.map((link) => (
                                 <li key={link.label}>
@@ -93,10 +95,10 @@ export default function Footer() {
                 {/* Bottom bar */}
                 <div className="mt-12 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <p className="text-slate-500 text-xs">
-                        © {new Date().getFullYear()} LeadMeta. All rights reserved.
+                        © {new Date().getFullYear()} LeadMeta. {t('footer.rights')}
                     </p>
                     <p className="text-slate-600 text-xs">
-                        마케팅과 데이터의 융합
+                        {t('footer.slogan')}
                     </p>
                 </div>
             </div>

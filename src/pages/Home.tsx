@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 /* ── Intersection Observer Hook ─────────────────── */
 function useReveal() {
@@ -21,14 +22,6 @@ function useReveal() {
     }, [])
     return ref
 }
-
-/* ── Stats Data ─────────────────────────────────── */
-const stats = [
-    { value: '10+', label: '운영 블로그', desc: '다양한 주제의 수익형 블로그' },
-    { value: '100K+', label: '분석 키워드', desc: '어바웃키워드를 통한 키워드 분석' },
-    { value: '5+', label: '전문 분야', desc: '이커머스, 파이낸스, 개발 등' },
-    { value: '24/7', label: '서비스 운영', desc: '365일 무중단 서비스' },
-]
 
 /* ── Services Data ──────────────────────────────── */
 const services = [
@@ -68,9 +61,17 @@ const services = [
 ]
 
 export default function Home() {
+    const { t } = useTranslation()
     const statsRef = useReveal()
     const servicesRef = useReveal()
     const ctaRef = useReveal()
+
+    const translatedStats = [
+        { value: '10+', label: t('home.stats_blogs'), desc: '다양한 주제의 수익형 블로그' },
+        { value: '100K+', label: t('home.stats_keywords'), desc: '어바웃키워드를 통한 키워드 분석' },
+        { value: '5+', label: t('home.stats_fields'), desc: '이커머스, 파이낸스, 개발 등' },
+        { value: '24/7', label: t('home.stats_uptime'), desc: '365일 무중단 서비스' },
+    ]
 
     return (
         <>
@@ -97,21 +98,15 @@ export default function Home() {
                         <div className="space-y-8">
                             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-sm font-medium animate-fade-in">
                                 <span className="w-2 h-2 rounded-full bg-brand-400 animate-pulse" />
-                                디지털 마케팅 에이전시
+                                {t('home.badge')}
                             </div>
 
                             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold leading-tight animate-fade-in-up">
-                                <span className="text-white">마케팅과</span>
-                                <br />
-                                <span className="text-white">데이터의 </span>
-                                <span className="gradient-text">융합</span>
+                                <span className="text-white">{t('home.hero_title')}</span>
                             </h1>
 
                             <p className="text-lg text-slate-400 leading-relaxed max-w-xl animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-                                LeadMeta는 키워드 분석 플랫폼 <strong className="text-white">어바웃키워드</strong> 운영,
-                                다양한 분야의 <strong className="text-white">수익형 블로그 네트워크</strong>,
-                                그리고 <strong className="text-white">광고 & 마케팅 대행</strong>을 통해
-                                디지털 세상에서 비즈니스의 성장을 이끕니다.
+                                {t('home.hero_desc')}
                             </p>
 
                             <div className="flex flex-wrap gap-4 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
@@ -119,7 +114,7 @@ export default function Home() {
                                     to="/services"
                                     className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-brand-500 to-brand-400 text-white font-semibold shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 hover:scale-105 transition-all duration-300"
                                 >
-                                    서비스 살펴보기
+                                    {t('home.cta_services')}
                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                     </svg>
@@ -128,26 +123,28 @@ export default function Home() {
                                     to="/about"
                                     className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-white/10 text-white font-medium hover:bg-white/5 hover:border-white/20 transition-all duration-300"
                                 >
-                                    회사 소개
+                                    {t('home.cta_about')}
                                 </Link>
                             </div>
                         </div>
 
-                        {/* Right Visual */}
+                        {/* Right Visual - Replaced icon with a stylized brand visual using the logo */}
                         <div className="hidden lg:flex items-center justify-center">
                             <div className="relative">
                                 {/* Floating glow */}
                                 <div className="absolute inset-0 bg-brand-500/20 rounded-3xl blur-3xl animate-pulse" />
-                                <div className="relative glass-card p-10 rounded-3xl animate-float">
-                                    <img
-                                        src="/LeadMeta_icon.webp"
-                                        alt="LeadMeta"
-                                        className="w-48 h-48 mx-auto drop-shadow-2xl"
-                                    />
-                                    <p className="mt-6 text-center text-slate-300 font-display font-semibold text-xl tracking-wide">
+                                <div className="relative glass-card p-12 rounded-3xl animate-float border border-white/10">
+                                    <div className="w-40 h-40 mx-auto flex items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl shadow-2xl border border-white/5">
+                                        <img
+                                            src="/LeadMeta_logo.webp"
+                                            alt="LeadMeta"
+                                            className="w-32 drop-shadow-2xl"
+                                        />
+                                    </div>
+                                    <p className="mt-8 text-center text-slate-300 font-display font-semibold text-xl tracking-wide">
                                         Lead<span className="gradient-text">META</span>
                                     </p>
-                                    <p className="text-center text-slate-500 text-sm mt-1">Convergence</p>
+                                    <p className="text-center text-slate-500 text-sm mt-1 uppercase tracking-widest">{t('footer.slogan')}</p>
                                 </div>
                             </div>
                         </div>
@@ -168,7 +165,7 @@ export default function Home() {
             <section className="py-24 bg-slate-950">
                 <div ref={statsRef} className="max-w-7xl mx-auto px-6 lg:px-8 opacity-0">
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-                        {stats.map((s, i) => (
+                        {translatedStats.map((s, i) => (
                             <div
                                 key={i}
                                 className="glass-card p-8 text-center"
@@ -177,7 +174,7 @@ export default function Home() {
                                     {s.value}
                                 </div>
                                 <div className="text-white font-semibold mb-1">{s.label}</div>
-                                <div className="text-slate-500 text-sm">{s.desc}</div>
+                                <div className="text-slate-500 text-sm italic opacity-80">{s.desc}</div>
                             </div>
                         ))}
                     </div>
@@ -192,36 +189,56 @@ export default function Home() {
                     <div className="text-center mb-16">
                         <span className="text-brand-400 font-medium text-sm uppercase tracking-widest">Our Services</span>
                         <h2 className="text-3xl lg:text-4xl font-display font-bold text-white mt-3">
-                            우리가 하는 일
+                            {t('home.services_title')}
                         </h2>
                         <p className="text-slate-400 mt-4 max-w-2xl mx-auto">
-                            데이터 분석부터 콘텐츠 운영, 마케팅까지.
-                            리드메타는 디지털 비즈니스의 모든 영역을 아우릅니다.
+                            {t('home.services_desc')}
                         </p>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
                         {services.map((s, i) => (
-                            <a
-                                key={i}
-                                href={s.link.startsWith('http') ? s.link : undefined}
-                                target={s.link.startsWith('http') ? '_blank' : undefined}
-                                rel={s.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                                className="glass-card p-8 group cursor-pointer block"
-                            >
-                                <div className="w-14 h-14 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center mb-6 group-hover:bg-brand-500/20 transition-colors duration-300">
-                                    {s.icon}
-                                </div>
-                                <h3 className="text-white text-xl font-bold mb-1">{s.title}</h3>
-                                <p className="text-brand-400/60 text-sm font-medium mb-3">{s.subtitle}</p>
-                                <p className="text-slate-400 text-sm leading-relaxed">{s.desc}</p>
-                                <div className="mt-5 text-brand-400 text-sm font-medium flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    자세히 보기
-                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </div>
-                            </a>
+                            s.link.startsWith('http') ? (
+                                <a
+                                    key={i}
+                                    href={s.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="glass-card p-8 group cursor-pointer block"
+                                >
+                                    <div className="w-14 h-14 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center mb-6 group-hover:bg-brand-500/20 transition-colors duration-300">
+                                        {s.icon}
+                                    </div>
+                                    <h3 className="text-white text-xl font-bold mb-1">{s.title}</h3>
+                                    <p className="text-brand-400/60 text-sm font-medium mb-3">{s.subtitle}</p>
+                                    <p className="text-slate-400 text-sm leading-relaxed">{s.desc}</p>
+                                    <div className="mt-5 text-brand-400 text-sm font-medium flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        자세히 보기
+                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </div>
+                                </a>
+                            ) : (
+                                <Link
+                                    key={i}
+                                    to={s.link}
+                                    className="glass-card p-8 group cursor-pointer block"
+                                >
+                                    <div className="w-14 h-14 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center mb-6 group-hover:bg-brand-500/20 transition-colors duration-300">
+                                        {s.icon}
+                                    </div>
+                                    <h3 className="text-white text-xl font-bold mb-1">{s.title}</h3>
+                                    <p className="text-brand-400/60 text-sm font-medium mb-3">{s.subtitle}</p>
+                                    <p className="text-slate-400 text-sm leading-relaxed">{s.desc}</p>
+                                    <div className="mt-5 text-brand-400 text-sm font-medium flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        자세히 보기
+                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </div>
+                                </Link>
+                            )
                         ))}
                     </div>
                 </div>
@@ -233,19 +250,17 @@ export default function Home() {
             <section className="py-24">
                 <div ref={ctaRef} className="max-w-4xl mx-auto px-6 lg:px-8 text-center opacity-0">
                     <h2 className="text-3xl lg:text-4xl font-display font-bold text-white mb-6">
-                        비즈니스 성장을 함께<br />
-                        시작하세요
+                        {t('home.cta_title')}
                     </h2>
                     <p className="text-slate-400 text-lg mb-10 max-w-2xl mx-auto">
-                        리드메타와 함께라면 데이터 기반의 정확한 마케팅 전략을 통해
-                        비즈니스의 다음 단계로 나아갈 수 있습니다.
+                        {t('home.cta_desc')}
                     </p>
                     <div className="flex flex-wrap justify-center gap-4">
                         <Link
                             to="/contact"
                             className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-brand-500 to-brand-400 text-white font-semibold text-lg shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 hover:scale-105 transition-all duration-300"
                         >
-                            무료 상담 받기
+                            {t('home.cta_consult')}
                         </Link>
                         <a
                             href="https://www.aboutkeyword.com"
