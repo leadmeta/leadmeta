@@ -3,11 +3,23 @@ export async function onRequestPost({ request, env }) {
         const body = await request.json()
         const { name, email, company, message } = body
 
-        // Validation
+        // Validation – required fields
         if (!name || !email || !message) {
             return new Response(JSON.stringify({
                 success: false,
                 error: '이름, 이메일, 메시지는 필수 항목입니다.',
+            }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            })
+        }
+
+        // Email format validation (simple regex)
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!emailPattern.test(email)) {
+            return new Response(JSON.stringify({
+                success: false,
+                error: '유효한 이메일 주소를 입력해 주세요.',
             }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
