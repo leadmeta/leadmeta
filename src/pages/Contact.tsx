@@ -6,7 +6,7 @@ export default function Contact() {
     const [submitted, setSubmitted] = useState(false)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
-    const [form, setForm] = useState({ name: '', email: '', company: '', message: '' })
+    const [form, setForm] = useState({ name: '', email: '', company: '', type: '', message: '' })
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
@@ -28,7 +28,11 @@ export default function Contact() {
             }
 
             if (!res.ok || !data.success) {
-                throw new Error(data?.error || '전송에 실패했습니다.')
+                let errorMessage = data?.error || '전송에 실패했습니다.'
+                if (errorMessage.includes('reply_to')) {
+                    errorMessage = t('contact.error_invalid_email')
+                }
+                throw new Error(errorMessage)
             }
 
             setSubmitted(true)
@@ -53,12 +57,12 @@ export default function Contact() {
                 </div>
                 <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-brand-500/5 rounded-full blur-[120px]" />
 
-                <div className="relative max-w-4xl mx-auto px-6 lg:px-8 text-center animate-fade-in-up">
-                    <span className="text-brand-500 font-medium text-sm uppercase tracking-widest">{t('contact.subtitle')}</span>
-                    <h1 className="text-4xl lg:text-5xl font-display font-bold text-slate-900 mt-4 mb-6">
+                <div className="relative max-w-5xl mx-auto px-6 lg:px-8 text-center animate-fade-in-up">
+                    <span className="text-brand-600 font-semibold text-sm uppercase tracking-widest bg-brand-50 px-4 py-2 rounded-full border border-brand-200 inline-block">{t('contact.subtitle')}</span>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-slate-900 mt-6 mb-8 leading-[1.15] tracking-tight">
                         {t('contact.title')}
                     </h1>
-                    <p className="text-slate-600 text-lg leading-relaxed max-w-2xl mx-auto">
+                    <p className="text-slate-600 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
                         {t('contact.desc')}
                     </p>
                 </div>
@@ -162,6 +166,24 @@ export default function Contact() {
                                             placeholder={t('contact.placeholder_company')}
                                             disabled={loading}
                                         />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="type" className="block text-slate-700 text-sm font-medium mb-2">{t('contact.label_type')}</label>
+                                        <select
+                                            id="type"
+                                            required
+                                            value={form.type}
+                                            onChange={(e) => setForm({ ...form, type: e.target.value })}
+                                            className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all appearance-none cursor-pointer"
+                                            disabled={loading}
+                                        >
+                                            <option value="" disabled>{t('contact.placeholder_type')}</option>
+                                            <option value="service">{t('contact.type_service')}</option>
+                                            <option value="error">{t('contact.type_error')}</option>
+                                            <option value="complain">{t('contact.type_complain')}</option>
+                                            <option value="partner">{t('contact.type_partner')}</option>
+                                            <option value="etc">{t('contact.type_etc')}</option>
+                                        </select>
                                     </div>
                                     <div>
                                         <label htmlFor="message" className="block text-slate-700 text-sm font-medium mb-2">{t('contact.label_message')}</label>

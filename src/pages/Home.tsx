@@ -101,16 +101,18 @@ export default function Home() {
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
                         {/* Left Content */}
                         <div className="space-y-8">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-sm font-medium animate-fade-in">
-                                <span className="w-2 h-2 rounded-full bg-brand-400 animate-pulse" />
-                                {t('home.badge')}
+                            <div className="inline-block">
+                                <span className="text-brand-600 font-semibold text-sm uppercase tracking-widest bg-brand-50 px-4 py-2 rounded-full border border-brand-200 flex items-center gap-2">
+                                    <span className="w-2 h-2 rounded-full bg-brand-500 animate-pulse" />
+                                    {t('home.badge')}
+                                </span>
                             </div>
 
-                            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold leading-tight animate-fade-in-up text-slate-900">
+                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.15] tracking-tight animate-fade-in-up text-slate-900">
                                 {t('home.hero_title')}
                             </h1>
 
-                            <p className="text-lg text-slate-600 leading-relaxed max-w-xl animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+                            <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-xl animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
                                 {t('home.hero_desc')}
                             </p>
 

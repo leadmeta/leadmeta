@@ -51,12 +51,12 @@ export default function Services() {
                 </div>
                 <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-brand-500/5 rounded-full blur-[120px]" />
 
-                <div ref={heroRef} className="relative max-w-4xl mx-auto px-6 lg:px-8 text-center opacity-0">
-                    <span className="text-brand-500 font-medium text-sm uppercase tracking-widest">{t('services.subtitle')}</span>
-                    <h1 className="text-4xl lg:text-5xl font-display font-bold text-slate-900 mt-4 mb-6">
-                        {t('services.title1')}<br /><span className="gradient-text">{t('services.title2')}</span>
+                <div ref={heroRef} className="relative max-w-5xl mx-auto px-6 lg:px-8 text-center opacity-0">
+                    <span className="text-brand-600 font-semibold text-sm uppercase tracking-widest bg-brand-50 px-4 py-2 rounded-full border border-brand-200 inline-block">{t('services.subtitle')}</span>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-slate-900 mt-6 mb-8 leading-[1.15] tracking-tight">
+                        {t('services.title1')}<br /><span className="text-brand-600">{t('services.title2')}</span>
                     </h1>
-                    <p className="text-slate-600 text-lg leading-relaxed max-w-2xl mx-auto">
+                    <p className="text-slate-600 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
                         {t('services.desc')}
                     </p>
                 </div>

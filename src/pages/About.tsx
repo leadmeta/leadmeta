@@ -76,7 +76,7 @@ export default function About() {
                 <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-sky-400/10 rounded-full blur-[150px]" />
 
                 <div ref={heroRef} className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 text-center opacity-0">
-                    <span className="text-brand-600 font-semibold text-sm uppercase tracking-widest">{t('about.subtitle')}</span>
+                    <span className="text-brand-600 font-semibold text-sm uppercase tracking-widest bg-brand-50 px-4 py-2 rounded-full border border-brand-200 inline-block">{t('about.subtitle')}</span>
                     <h1 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold text-slate-900 mt-6 mb-8 leading-[1.15] tracking-tight">
                         {t('about.title1')}<br /><span className="text-brand-600">{t('about.title2')}</span>
                     </h1>

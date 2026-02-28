@@ -19,12 +19,12 @@ export default function BlogNetwork() {
 
             <div className="relative max-w-7xl mx-auto px-6 lg:px-8 z-10">
                 {/* Header */}
-                <div className="text-center max-w-3xl mx-auto mb-20 animate-fade-in-up">
-                    <span className="text-brand-600 font-medium text-sm uppercase tracking-widest bg-brand-50 px-4 py-2 rounded-full border border-brand-200">{t('blognet.badge')}</span>
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-slate-900 mt-8 mb-6">
+                <div className="text-center max-w-5xl mx-auto mb-20 animate-fade-in-up">
+                    <span className="text-brand-600 font-semibold text-sm uppercase tracking-widest bg-brand-50 px-4 py-2 rounded-full border border-brand-200 inline-block">{t('blognet.badge')}</span>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-slate-900 mt-8 mb-8 leading-[1.15] tracking-tight">
                         {t('blognet.title')}
                     </h1>
-                    <p className="text-slate-600 text-lg leading-relaxed">
+                    <p className="text-slate-600 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
                         {t('blognet.desc')}
                     </p>
                 </div>
