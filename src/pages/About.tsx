@@ -66,7 +66,7 @@ export default function About() {
             <section className="pt-40 pb-32 relative overflow-hidden flex items-center justify-center min-h-[85vh]">
                 <div className="absolute inset-0 bg-slate-50">
                     <img
-                        src="/image/about_hero_bg.png"
+                        src="/image/about_hero_bg.webp"
                         alt="About Hero"
                         className="absolute inset-0 w-full h-full object-cover opacity-[0.25]"
                     />
@@ -112,7 +112,7 @@ export default function About() {
             {/* Section 2 - Innovation */}
             <section className="py-32 relative overflow-hidden bg-slate-50">
                 <div className="absolute inset-0 opacity-[0.4]">
-                    <img src="/image/abstract_blue_bg_1.png" alt="Innovation Background" className="w-full h-full object-cover" />
+                    <img src="/image/abstract_blue_bg_1.webp" alt="Innovation Background" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-white/80 backdrop-blur-sm" />
                 </div>
                 <div ref={section2Ref} className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 text-center opacity-0">

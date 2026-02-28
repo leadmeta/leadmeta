@@ -8,7 +8,7 @@ export default function BlogNetwork() {
             {/* Background Effects */}
             <div className="absolute inset-0 pointer-events-none">
                 <img
-                    src="/image/abstract_blue_bg_2.png"
+                    src="/image/abstract_blue_bg_2.webp"
                     alt="Background"
                     className="absolute inset-0 w-full h-full object-cover opacity-[0.2]"
                 />

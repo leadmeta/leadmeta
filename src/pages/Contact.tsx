@@ -45,7 +45,7 @@ export default function Contact() {
             <section className="pt-32 pb-20 relative overflow-hidden">
                 <div className="absolute inset-0 bg-slate-50">
                     <img
-                        src="/image/abstract_blue_bg_1.png"
+                        src="/image/abstract_blue_bg_1.webp"
                         alt="Contact Background"
                         className="absolute inset-0 w-full h-full object-cover opacity-[0.2]"
                     />

@@ -34,7 +34,7 @@ export default function Services() {
         { icon: '/image/tech_icon.webp', name: t('services.blog_dev'), desc: t('services.blog_dev_desc') },
         { icon: '/image/rocket_icon.webp', name: t('services.blog_profit'), desc: t('services.blog_profit_desc') },
         { icon: '/image/star_icon.webp', name: t('services.blog_tech'), desc: t('services.blog_tech_desc') },
-        { icon: '/image/marketing_icon.png', name: t('services.blog_marketing'), desc: t('services.blog_marketing_desc') },
+        { icon: '/image/marketing_icon.webp', name: t('services.blog_marketing'), desc: t('services.blog_marketing_desc') },
     ]
 
     return (
@@ -43,7 +43,7 @@ export default function Services() {
             <section className="pt-32 pb-20 relative overflow-hidden">
                 <div className="absolute inset-0 bg-slate-50">
                     <img
-                        src="/image/services_hero_bg.png"
+                        src="/image/services_hero_bg.webp"
                         alt="Services Hero"
                         className="absolute inset-0 w-full h-full object-cover opacity-[0.2]"
                     />
