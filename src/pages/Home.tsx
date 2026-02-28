@@ -77,10 +77,16 @@ export default function Home() {
             {/* ── Hero ───────────────────────────────────── */}
             <section className="relative min-h-screen flex items-center overflow-hidden">
                 {/* Background effects */}
-                <div className="absolute inset-0">
-                    <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-                    <div className="absolute top-1/4 -right-20 w-[600px] h-[600px] bg-brand-500/10 rounded-full blur-[120px]" />
-                    <div className="absolute bottom-1/4 -left-20 w-[400px] h-[400px] bg-brand-400/5 rounded-full blur-[100px]" />
+                <div className="absolute inset-0 bg-slate-50">
+                    {/* Hopeful Sky Background */}
+                    <img
+                        src="/image/hopeful_sky.webp"
+                        alt="Hopeful Sky"
+                        className="absolute inset-0 w-full h-full object-cover opacity-[0.35]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/70 to-slate-50/90" />
+                    <div className="absolute top-1/4 -right-20 w-[600px] h-[600px] bg-brand-500/10 rounded-full blur-[120px] mix-blend-multiply" />
+                    <div className="absolute bottom-1/4 -left-20 w-[400px] h-[400px] bg-sky-400/10 rounded-full blur-[100px] mix-blend-multiply" />
                     {/* Grid pattern */}
                     <div
                         className="absolute inset-0 opacity-[0.03]"
@@ -100,11 +106,11 @@ export default function Home() {
                                 {t('home.badge')}
                             </div>
 
-                            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold leading-tight animate-fade-in-up">
-                                <span className="text-white">{t('home.hero_title')}</span>
+                            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold leading-tight animate-fade-in-up text-slate-900">
+                                {t('home.hero_title')}
                             </h1>
 
-                            <p className="text-lg text-slate-400 leading-relaxed max-w-xl animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+                            <p className="text-lg text-slate-600 leading-relaxed max-w-xl animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
                                 {t('home.hero_desc')}
                             </p>
 
@@ -118,28 +124,22 @@ export default function Home() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                     </svg>
                                 </Link>
-                                <Link
-                                    to="/about"
-                                    className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-white/10 text-white font-medium hover:bg-white/5 hover:border-white/20 transition-all duration-300"
-                                >
-                                    {t('home.cta_about')}
-                                </Link>
                             </div>
                         </div>
 
                         {/* Right Visual */}
                         <div className="hidden lg:flex items-center justify-center">
                             <div className="relative">
-                                <div className="absolute inset-0 bg-brand-500/20 rounded-3xl blur-3xl animate-pulse" />
-                                <div className="relative glass-card p-12 rounded-3xl animate-float border border-white/10">
-                                    <div className="w-40 h-40 mx-auto flex items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl shadow-2xl border border-white/5">
+                                <div className="absolute inset-0 bg-brand-400/20 rounded-3xl blur-3xl animate-pulse" />
+                                <div className="relative glass-card p-12 rounded-3xl animate-float border border-slate-200">
+                                    <div className="w-40 h-40 mx-auto flex items-center justify-center bg-white rounded-2xl shadow-xl shadow-brand-500/10 border border-slate-100">
                                         <img
                                             src="/image/LeadMeta_logo.webp"
                                             alt="LeadMeta"
-                                            className="w-32 drop-shadow-2xl"
+                                            className="w-32 drop-shadow-md"
                                         />
                                     </div>
-                                    <p className="mt-8 text-center text-slate-300 font-display font-semibold text-xl tracking-wide">
+                                    <p className="mt-8 text-center text-slate-800 font-display font-semibold text-xl tracking-wide">
                                         Lead<span className="gradient-text">META</span>
                                     </p>
                                     <p className="text-center text-slate-500 text-sm mt-1 uppercase tracking-widest">{t('footer.slogan')}</p>
@@ -160,19 +160,19 @@ export default function Home() {
             <div className="section-divider" />
 
             {/* ── Stats ──────────────────────────────────── */}
-            <section className="py-24 bg-slate-950">
+            <section className="py-24 bg-white/50 backdrop-blur-sm relative z-10">
                 <div ref={statsRef} className="max-w-7xl mx-auto px-6 lg:px-8 opacity-0">
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
                         {translatedStats.map((s, i) => (
                             <div
                                 key={i}
-                                className="glass-card p-8 text-center"
+                                className="glass-card p-8 text-center border border-brand-100/50"
                             >
                                 <div className="text-4xl lg:text-5xl font-display font-bold gradient-text mb-2">
                                     {s.value}
                                 </div>
-                                <div className="text-white font-semibold mb-1">{s.label}</div>
-                                <div className="text-slate-500 text-sm italic opacity-80">{s.desc}</div>
+                                <div className="text-slate-800 font-semibold mb-1">{s.label}</div>
+                                <div className="text-slate-500 text-sm italic">{s.desc}</div>
                             </div>
                         ))}
                     </div>
@@ -182,14 +182,14 @@ export default function Home() {
             <div className="section-divider" />
 
             {/* ── Services Preview ───────────────────────── */}
-            <section className="py-24 bg-slate-950/50">
+            <section className="py-24 bg-slate-50/50 relative z-10">
                 <div ref={servicesRef} className="max-w-7xl mx-auto px-6 lg:px-8 opacity-0">
                     <div className="text-center mb-16">
-                        <span className="text-brand-400 font-medium text-sm uppercase tracking-widest">Our Services</span>
-                        <h2 className="text-3xl lg:text-4xl font-display font-bold text-white mt-3">
+                        <span className="text-brand-500 font-medium text-sm uppercase tracking-widest">Our Services</span>
+                        <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mt-3">
                             {t('home.services_title')}
                         </h2>
-                        <p className="text-slate-400 mt-4 max-w-2xl mx-auto">
+                        <p className="text-slate-600 mt-4 max-w-2xl mx-auto">
                             {t('home.services_desc')}
                         </p>
                     </div>
@@ -204,13 +204,13 @@ export default function Home() {
                                     rel="noopener noreferrer"
                                     className="glass-card p-8 group cursor-pointer block"
                                 >
-                                    <div className="w-14 h-14 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center mb-6 group-hover:bg-brand-500/20 transition-colors duration-300">
+                                    <div className="w-14 h-14 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center mb-6 group-hover:bg-brand-100 transition-colors duration-300">
                                         {s.icon}
                                     </div>
-                                    <h3 className="text-white text-xl font-bold mb-1">{s.title}</h3>
-                                    <p className="text-brand-400/60 text-sm font-medium mb-3">{s.subtitle}</p>
-                                    <p className="text-slate-400 text-sm leading-relaxed">{s.desc}</p>
-                                    <div className="mt-5 text-brand-400 text-sm font-medium flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <h3 className="text-slate-900 text-xl font-bold mb-1">{s.title}</h3>
+                                    <p className="text-brand-500 text-sm font-medium mb-3">{s.subtitle}</p>
+                                    <p className="text-slate-600 text-sm leading-relaxed">{s.desc}</p>
+                                    <div className="mt-5 text-brand-500 text-sm font-medium flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                         {t('home.view_more')}
                                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -223,13 +223,13 @@ export default function Home() {
                                     to={s.link}
                                     className="glass-card p-8 group cursor-pointer block"
                                 >
-                                    <div className="w-14 h-14 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center mb-6 group-hover:bg-brand-500/20 transition-colors duration-300">
+                                    <div className="w-14 h-14 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center mb-6 group-hover:bg-brand-100 transition-colors duration-300">
                                         {s.icon}
                                     </div>
-                                    <h3 className="text-white text-xl font-bold mb-1">{s.title}</h3>
-                                    <p className="text-brand-400/60 text-sm font-medium mb-3">{s.subtitle}</p>
-                                    <p className="text-slate-400 text-sm leading-relaxed">{s.desc}</p>
-                                    <div className="mt-5 text-brand-400 text-sm font-medium flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <h3 className="text-slate-900 text-xl font-bold mb-1">{s.title}</h3>
+                                    <p className="text-brand-500 text-sm font-medium mb-3">{s.subtitle}</p>
+                                    <p className="text-slate-600 text-sm leading-relaxed">{s.desc}</p>
+                                    <div className="mt-5 text-brand-500 text-sm font-medium flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                         {t('home.view_more')}
                                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -245,12 +245,12 @@ export default function Home() {
             <div className="section-divider" />
 
             {/* ── CTA ────────────────────────────────────── */}
-            <section className="py-24">
+            <section className="py-24 relative z-10">
                 <div ref={ctaRef} className="max-w-4xl mx-auto px-6 lg:px-8 text-center opacity-0">
-                    <h2 className="text-3xl lg:text-4xl font-display font-bold text-white mb-6">
+                    <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-6">
                         {t('home.cta_title')}
                     </h2>
-                    <p className="text-slate-400 text-lg mb-10 max-w-2xl mx-auto">
+                    <p className="text-slate-600 text-lg mb-10 max-w-2xl mx-auto">
                         {t('home.cta_desc')}
                     </p>
                     <div className="flex flex-wrap justify-center gap-4">
@@ -260,17 +260,6 @@ export default function Home() {
                         >
                             {t('home.cta_consult')}
                         </Link>
-                        <a
-                            href="https://www.aboutkeyword.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-white/10 text-white font-medium hover:bg-white/5 transition-all duration-300"
-                        >
-                            {t('home.cta_visit')}
-                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg>
-                        </a>
                     </div>
                 </div>
             </section>

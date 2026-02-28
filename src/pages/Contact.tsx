@@ -20,10 +20,15 @@ export default function Contact() {
                 body: JSON.stringify(form),
             })
 
-            const data = await res.json()
+            let data;
+            try {
+                data = await res.json()
+            } catch (e) {
+                throw new Error('서버와 연결할 수 없습니다. 잠시 후 다시 시도해 주세요.')
+            }
 
             if (!res.ok || !data.success) {
-                throw new Error(data.error || '전송에 실패했습니다.')
+                throw new Error(data?.error || '전송에 실패했습니다.')
             }
 
             setSubmitted(true)
@@ -38,15 +43,22 @@ export default function Contact() {
         <>
             {/* Hero */}
             <section className="pt-32 pb-20 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-slate-900 to-slate-950" />
+                <div className="absolute inset-0 bg-slate-50">
+                    <img
+                        src="/image/abstract_blue_bg_1.png"
+                        alt="Contact Background"
+                        className="absolute inset-0 w-full h-full object-cover opacity-[0.2]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/70 to-slate-50/90" />
+                </div>
                 <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-brand-500/5 rounded-full blur-[120px]" />
 
                 <div className="relative max-w-4xl mx-auto px-6 lg:px-8 text-center animate-fade-in-up">
-                    <span className="text-brand-400 font-medium text-sm uppercase tracking-widest">{t('contact.subtitle')}</span>
-                    <h1 className="text-4xl lg:text-5xl font-display font-bold text-white mt-4 mb-6">
+                    <span className="text-brand-500 font-medium text-sm uppercase tracking-widest">{t('contact.subtitle')}</span>
+                    <h1 className="text-4xl lg:text-5xl font-display font-bold text-slate-900 mt-4 mb-6">
                         {t('contact.title')}
                     </h1>
-                    <p className="text-slate-400 text-lg leading-relaxed max-w-2xl mx-auto">
+                    <p className="text-slate-600 text-lg leading-relaxed max-w-2xl mx-auto">
                         {t('contact.desc')}
                     </p>
                 </div>
@@ -59,107 +71,107 @@ export default function Contact() {
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="grid lg:grid-cols-5 gap-16">
                         {/* Contact Info */}
-                        <div className="lg:col-span-2 space-y-8">
-                            <div className="glass-card p-6">
-                                <div className="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center mb-4">
+                        <div className="lg:col-span-2 space-y-8 relative z-10">
+                            <div className="glass-card p-6 border border-slate-200">
+                                <div className="w-12 h-12 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center mb-4">
                                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                     </svg>
                                 </div>
-                                <h3 className="text-white font-bold mb-1">{t('contact.email_title')}</h3>
-                                <p className="text-slate-400 text-sm">{t('contact.email_value')}</p>
+                                <h3 className="text-slate-900 font-bold mb-1">{t('contact.email_title')}</h3>
+                                <p className="text-slate-600 text-sm">{t('contact.email_value')}</p>
                             </div>
 
-                            <div className="glass-card p-6">
-                                <div className="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center mb-4">
+                            <div className="glass-card p-6 border border-slate-200">
+                                <div className="w-12 h-12 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center mb-4">
                                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                                     </svg>
                                 </div>
-                                <h3 className="text-white font-bold mb-1">{t('contact.web_title')}</h3>
-                                <p className="text-slate-400 text-sm">{t('contact.web_value')}</p>
+                                <h3 className="text-slate-900 font-bold mb-1">{t('contact.web_title')}</h3>
+                                <p className="text-slate-600 text-sm">{t('contact.web_value')}</p>
                             </div>
 
-                            <div className="glass-card p-6">
-                                <div className="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center mb-4">
+                            <div className="glass-card p-6 border border-slate-200">
+                                <div className="w-12 h-12 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center mb-4">
                                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 </div>
-                                <h3 className="text-white font-bold mb-1">{t('contact.response_title')}</h3>
-                                <p className="text-slate-400 text-sm">{t('contact.response_value')}</p>
+                                <h3 className="text-slate-900 font-bold mb-1">{t('contact.response_title')}</h3>
+                                <p className="text-slate-600 text-sm">{t('contact.response_value')}</p>
                             </div>
                         </div>
 
                         {/* Form */}
-                        <div className="lg:col-span-3">
+                        <div className="lg:col-span-3 relative z-10">
                             {submitted ? (
-                                <div className="glass-card p-12 text-center">
-                                    <div className="w-16 h-16 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mx-auto mb-6">
+                                <div className="glass-card p-12 text-center border border-slate-200">
+                                    <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center mx-auto mb-6">
                                         <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                         </svg>
                                     </div>
-                                    <h3 className="text-white text-2xl font-bold mb-3">{t('contact.success_title')}</h3>
-                                    <p className="text-slate-400">{t('contact.success_desc')}</p>
+                                    <h3 className="text-slate-900 text-2xl font-bold mb-3">{t('contact.success_title')}</h3>
+                                    <p className="text-slate-600">{t('contact.success_desc')}</p>
                                 </div>
                             ) : (
-                                <form onSubmit={handleSubmit} className="glass-card p-8 lg:p-10 space-y-6">
+                                <form onSubmit={handleSubmit} className="glass-card p-8 lg:p-10 space-y-6 border border-slate-200">
                                     {error && (
-                                        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+                                        <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm">
                                             {error}
                                         </div>
                                     )}
 
                                     <div className="grid sm:grid-cols-2 gap-6">
                                         <div>
-                                            <label htmlFor="name" className="block text-white text-sm font-medium mb-2">{t('contact.label_name')}</label>
+                                            <label htmlFor="name" className="block text-slate-700 text-sm font-medium mb-2">{t('contact.label_name')}</label>
                                             <input
                                                 id="name"
                                                 type="text"
                                                 required
                                                 value={form.name}
                                                 onChange={(e) => setForm({ ...form, name: e.target.value })}
-                                                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-400/50 focus:ring-1 focus:ring-brand-400/25 transition-all"
+                                                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all"
                                                 placeholder={t('contact.placeholder_name')}
                                                 disabled={loading}
                                             />
                                         </div>
                                         <div>
-                                            <label htmlFor="email" className="block text-white text-sm font-medium mb-2">{t('contact.label_email')}</label>
+                                            <label htmlFor="email" className="block text-slate-700 text-sm font-medium mb-2">{t('contact.label_email')}</label>
                                             <input
                                                 id="email"
                                                 type="email"
                                                 required
                                                 value={form.email}
                                                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                                                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-400/50 focus:ring-1 focus:ring-brand-400/25 transition-all"
+                                                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all"
                                                 placeholder={t('contact.placeholder_email')}
                                                 disabled={loading}
                                             />
                                         </div>
                                     </div>
                                     <div>
-                                        <label htmlFor="company" className="block text-white text-sm font-medium mb-2">{t('contact.label_company')}</label>
+                                        <label htmlFor="company" className="block text-slate-700 text-sm font-medium mb-2">{t('contact.label_company')}</label>
                                         <input
                                             id="company"
                                             type="text"
                                             value={form.company}
                                             onChange={(e) => setForm({ ...form, company: e.target.value })}
-                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-400/50 focus:ring-1 focus:ring-brand-400/25 transition-all"
+                                            className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all"
                                             placeholder={t('contact.placeholder_company')}
                                             disabled={loading}
                                         />
                                     </div>
                                     <div>
-                                        <label htmlFor="message" className="block text-white text-sm font-medium mb-2">{t('contact.label_message')}</label>
+                                        <label htmlFor="message" className="block text-slate-700 text-sm font-medium mb-2">{t('contact.label_message')}</label>
                                         <textarea
                                             id="message"
                                             required
                                             rows={5}
                                             value={form.message}
                                             onChange={(e) => setForm({ ...form, message: e.target.value })}
-                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-400/50 focus:ring-1 focus:ring-brand-400/25 transition-all resize-none"
+                                            className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all resize-none"
                                             placeholder={t('contact.placeholder_message')}
                                             disabled={loading}
                                         />

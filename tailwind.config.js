@@ -8,16 +8,16 @@ export default {
         extend: {
             colors: {
                 brand: {
-                    50: '#fef2f0',
-                    100: '#fde3dd',
-                    200: '#fcc5b8',
-                    300: '#f9a48f',
-                    400: '#f48a72',
-                    500: '#e8735c',
-                    600: '#d45a43',
-                    700: '#b24535',
-                    800: '#933b30',
-                    900: '#7a352d',
+                    50: '#eff6ff',
+                    100: '#dbeafe',
+                    200: '#bfdbfe',
+                    300: '#93c5fd',
+                    400: '#60a5fa',
+                    500: '#3b82f6',
+                    600: '#2563eb',
+                    700: '#1d4ed8',
+                    800: '#1e40af',
+                    900: '#1e3a8a',
                 },
                 slate: {
                     750: '#293548',
@@ -26,8 +26,19 @@ export default {
                 },
             },
             fontFamily: {
-                sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-                display: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
+                sans: ['Inter', 'GMarketSans', 'system-ui', '-apple-system', 'sans-serif'],
+                display: ['Outfit', 'GMarketSans', 'Inter', 'system-ui', 'sans-serif'],
+            },
+            lineHeight: {
+                tight: '1.3',
+                normal: '1.6',
+                relaxed: '1.8',
+                loose: '2',
+            },
+            letterSpacing: {
+                tight: '-0.01em',
+                tighter: '-0.02em',
+                widest: '0.1em',
             },
         },
     },

@@ -30,6 +30,14 @@ app.post('/api/contact', async (req, res) => {
             })
         }
 
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({
+                success: false,
+                error: '유효한 이메일 주소를 입력해 주세요.',
+            })
+        }
+
         // Send email via Resend
         const { data, error } = await resend.emails.send({
             from: 'LeadMeta Contact <onboarding@resend.dev>',
@@ -72,9 +80,9 @@ app.post('/api/contact', async (req, res) => {
 
         if (error) {
             console.error('[Resend Error]', error)
-            return res.status(500).json({
+            return res.status(400).json({  // Use 400 instead of 500 for client errors like invalid formats
                 success: false,
-                error: '이메일 전송에 실패했습니다. 잠시 후 다시 시도해 주세요.',
+                error: error.message || '이메일 전송에 실패했습니다. 잠시 후 다시 시도해 주세요.',
             })
         }
 
