@@ -11,7 +11,8 @@ const PORT = process.env.PORT || 3001
 
 // ── Middleware ──────────────────────────────────
 app.use(cors())
-app.use(express.json())
+app.use(express.json({ limit: '50mb' }))
+app.use(express.urlencoded({ limit: '50mb', extended: true }))
 
 // ── Resend Setup ───────────────────────────────
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -20,7 +21,7 @@ const RECIPIENT_EMAIL = process.env.RECIPIENT_EMAIL || 'contact@leadmeta.xyz'
 // ── API Routes ─────────────────────────────────
 app.post('/api/contact', async (req, res) => {
     try {
-        const { name, email, company, message } = req.body
+        const { name, email, company, type, message, attachment } = req.body
 
         // Validation
         if (!name || !email || !message) {
@@ -38,45 +39,75 @@ app.post('/api/contact', async (req, res) => {
             })
         }
 
-        // Send email via Resend
-        const { data, error } = await resend.emails.send({
+        const typeLabels = {
+            service: '서비스 문의',
+            error: '오류 제보',
+            complain: '불편 사항',
+            partner: '제휴 제안',
+            etc: '기타'
+        }
+        const typeLabel = typeLabels[type] || type || '미지정'
+
+        const payload = {
             from: 'LeadMeta Contact <onboarding@resend.dev>',
             to: [RECIPIENT_EMAIL],
-            subject: `[LeadMeta 문의] ${name}님의 문의`,
+            subject: `[LeadMeta 문의] ${name}님의 문의 (${typeLabel})`,
             replyTo: email,
             html: `
-                <div style="font-family: 'Segoe UI', Tahoma, sans-serif; max-width: 600px; margin: 0 auto; background: #0d1520; color: #e2e8f0; padding: 32px; border-radius: 16px;">
-                    <div style="border-bottom: 2px solid rgba(244,138,114,0.3); padding-bottom: 20px; margin-bottom: 24px;">
-                        <h1 style="color: #f48a72; font-size: 24px; margin: 0;">새로운 문의가 접수되었습니다</h1>
+                <div style="font-family: 'Segoe UI', Tahoma, sans-serif; max-width: 600px; margin: 20px auto; background: #ffffff; color: #1e293b; padding: 40px; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+                    <div style="border-bottom: 2px solid #f48a72; padding-bottom: 20px; margin-bottom: 24px;">
+                        <h1 style="color: #f48a72; font-size: 24px; margin: 0; font-weight: 700;">새로운 문의가 접수되었습니다</h1>
                         <p style="color: #64748b; font-size: 14px; margin: 8px 0 0 0;">LeadMeta 웹사이트 문의 폼</p>
                     </div>
 
                     <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
                         <tr>
-                            <td style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: #94a3b8; width: 100px; vertical-align: top;">이름</td>
-                            <td style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: #f1f5f9; font-weight: 600;">${escapeHtml(name)}</td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; width: 100px; vertical-align: top; font-size: 14px;">이름</td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #0f172a; font-weight: 600;">${escapeHtml(name)}</td>
                         </tr>
                         <tr>
-                            <td style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: #94a3b8; vertical-align: top;">이메일</td>
-                            <td style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06);"><a href="mailto:${escapeHtml(email)}" style="color: #f48a72; text-decoration: none;">${escapeHtml(email)}</a></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; vertical-align: top; font-size: 14px;">이메일</td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9;"><a href="mailto:${escapeHtml(email)}" style="color: #f48a72; text-decoration: none; font-weight: 600;">${escapeHtml(email)}</a></td>
                         </tr>
                         <tr>
-                            <td style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: #94a3b8; vertical-align: top;">회사명</td>
-                            <td style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: #f1f5f9;">${company ? escapeHtml(company) : '<span style="color: #475569;">-</span>'}</td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; vertical-align: top; font-size: 14px;">회사명</td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #0f172a;">${company ? escapeHtml(company) : '<span style="color: #cbd5e1;">-</span>'}</td>
                         </tr>
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; vertical-align: top; font-size: 14px;">문의 유형</td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #0f172a; font-weight: 600;">${typeLabel}</td>
+                        </tr>
+                        ${attachment ? `
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; vertical-align: top; font-size: 14px;">첨부파일</td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #0f172a;">${attachment.name}</td>
+                        </tr>
+                        ` : ''}
                     </table>
 
-                    <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
-                        <h3 style="color: #94a3b8; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 12px 0;">메시지</h3>
-                        <p style="color: #e2e8f0; line-height: 1.7; margin: 0; white-space: pre-wrap;">${escapeHtml(message)}</p>
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+                        <h3 style="color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 12px 0; font-weight: 700;">메시지 내용</h3>
+                        <p style="color: #334155; line-height: 1.7; margin: 0; white-space: pre-wrap; font-size: 15px;">${escapeHtml(message)}</p>
                     </div>
 
-                    <div style="text-align: center; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06);">
-                        <p style="color: #475569; font-size: 12px; margin: 0;">이 이메일은 <a href="https://www.leadmeta.xyz" style="color: #f48a72;">leadmeta.xyz</a> 문의 폼에서 자동 발송되었습니다.</p>
+                    <div style="text-align: center; padding-top: 16px; border-top: 1px solid #f1f5f9;">
+                        <p style="color: #94a3b8; font-size: 12px; margin: 0;">이 이메일은 <a href="https://www.leadmeta.xyz" style="color: #f48a72; text-decoration: none;">LeadMeta</a> 문의 폼에서 자동 발송되었습니다.</p>
                     </div>
                 </div>
             `,
-        })
+        }
+
+        if (attachment) {
+            payload.attachments = [
+                {
+                    content: attachment.content,
+                    filename: attachment.name,
+                }
+            ]
+        }
+
+        // Send email via Resend
+        const { data, error } = await resend.emails.send(payload)
 
         if (error) {
             console.error('[Resend Error]', error)

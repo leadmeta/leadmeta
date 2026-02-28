@@ -153,6 +153,12 @@
         "placeholder_company": "(선택사항)",
         "label_message": "메시지 *",
         "placeholder_message": "문의 내용을 입력해 주세요...",
+        "label_attachment": "첨부 파일",
+        "placeholder_attachment": "이미지 파일을 선택하거나 드래그하세요",
+        "attachment_desc": "이미지 파일(jpg, png, webp)만 첨부 가능하며, 최대 5MB까지 업로드할 수 있습니다.",
+        "error_file_size": "파일 크기가 너무 큽니다 (최대 5MB).",
+        "error_file_type": "지원하지 않는 파일 형식입니다.",
+        "btn_attach": "파일 첨부하기",
         "submit": "문의 보내기"
     },
     "marketing": {

@@ -153,6 +153,12 @@
         "placeholder_company": "(Optional)",
         "label_message": "Message *",
         "placeholder_message": "Please enter your inquiry...",
+        "label_attachment": "Attachments",
+        "placeholder_attachment": "Select or drag image files",
+        "attachment_desc": "Only image files (jpg, png, webp) are allowed, up to 5MB.",
+        "error_file_size": "File size is too large (max 5MB).",
+        "error_file_type": "Unsupported file format.",
+        "btn_attach": "Attach Files",
         "submit": "Send Inquiry"
     },
     "marketing": {

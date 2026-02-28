@@ -1,7 +1,7 @@
 export async function onRequestPost({ request, env }) {
     try {
         const body = await request.json()
-        const { name, email, company, message } = body
+        const { name, email, company, message, attachment } = body
 
         // Validation – required fields
         if (!name || !email || !message) {
@@ -13,7 +13,6 @@ export async function onRequestPost({ request, env }) {
                 headers: { 'Content-Type': 'application/json' }
             })
         }
-
         // Email format validation (simple regex)
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
         if (!emailPattern.test(email)) {
@@ -38,7 +37,6 @@ export async function onRequestPost({ request, env }) {
                 headers: { 'Content-Type': 'application/json' }
             })
         }
-
         const htmlContent = `
             <div style="font-family: 'Segoe UI', Tahoma, sans-serif; max-width: 600px; margin: 0 auto; background: #0d1520; color: #e2e8f0; padding: 32px; border-radius: 16px;">
                 <div style="border-bottom: 2px solid rgba(244,138,114,0.3); padding-bottom: 20px; margin-bottom: 24px;">
@@ -59,6 +57,12 @@ export async function onRequestPost({ request, env }) {
                         <td style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: #94a3b8; vertical-align: top;">회사명</td>
                         <td style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: #f1f5f9;">${company ? escapeHtml(company) : '<span style="color: #475569;">-</span>'}</td>
                     </tr>
+                    ${attachment ? `
+                    <tr>
+                        <td style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: #94a3b8; vertical-align: top;">첨부파일</td>
+                        <td style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: #f1f5f9;">${escapeHtml(attachment.name)}</td>
+                    </tr>
+                    ` : ''}
                 </table>
 
                 <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
@@ -72,19 +76,30 @@ export async function onRequestPost({ request, env }) {
             </div>
         `
 
+        const resendPayload = {
+            from: 'LeadMeta Contact <onboarding@resend.dev>',
+            to: [recipientEmail],
+            subject: `[LeadMeta 문의] ${name}님의 문의`,
+            reply_to: email,
+            html: htmlContent
+        }
+
+        if (attachment) {
+            resendPayload.attachments = [
+                {
+                    content: attachment.content,
+                    filename: attachment.name,
+                }
+            ]
+        }
+
         const resendResponse = await fetch('https://api.resend.com/emails', {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${resendApiKey}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                from: 'LeadMeta Contact <onboarding@resend.dev>',
-                to: [recipientEmail],
-                subject: `[LeadMeta 문의] ${name}님의 문의`,
-                reply_to: email, // Resend API uses reply_to, not replyTo
-                html: htmlContent
-            })
+            body: JSON.stringify(resendPayload)
         })
 
         const resendData = await resendResponse.json()
