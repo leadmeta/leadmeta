@@ -28,6 +28,7 @@ export default function About() {
     const section1Ref = useReveal()
     const section2Ref = useReveal()
     const section3Ref = useReveal()
+    const section4Ref = useReveal()
     const valuesRef = useReveal()
 
     const values = [
@@ -134,7 +135,7 @@ export default function About() {
                 </div>
             </section>
 
-            {/* Section 3 - Action & Partnership */}
+            {/* Section 3 - Fundy */}
             <section className="py-32 relative overflow-hidden bg-white">
                 <div ref={section3Ref} className="max-w-5xl mx-auto px-6 lg:px-8 text-center opacity-0">
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-slate-900 mb-6 leading-tight">
@@ -143,11 +144,34 @@ export default function About() {
                     <p className="text-slate-600 text-xl leading-relaxed max-w-2xl mx-auto mb-10">
                         {t('about.section3_desc')}
                     </p>
+                    <a
+                        href="https://fundy.ai.kr"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-brand-600 font-semibold text-lg hover:text-brand-700 transition-colors group"
+                    >
+                        {t('about.section3_cta')}
+                        <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+            </section>
+
+            {/* Section 4 - Action & Partnership */}
+            <section className="py-32 relative overflow-hidden bg-slate-50">
+                <div ref={section4Ref} className="max-w-5xl mx-auto px-6 lg:px-8 text-center opacity-0">
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-slate-900 mb-6 leading-tight">
+                        {t('about.section4_title')}
+                    </h2>
+                    <p className="text-slate-600 text-xl leading-relaxed max-w-2xl mx-auto mb-10">
+                        {t('about.section4_desc')}
+                    </p>
                     <Link
                         to="/contact"
                         className="inline-flex items-center gap-2 text-brand-600 font-semibold text-lg hover:text-brand-700 transition-colors group"
                     >
-                        {t('about.section3_cta')}
+                        {t('about.section4_cta')}
                         <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
@@ -158,7 +182,7 @@ export default function About() {
             <div className="section-divider opacity-50" />
 
             {/* Core Values / Leadership */}
-            <section className="py-32 relative z-10 bg-slate-50">
+            <section className="py-32 relative z-10 bg-white">
                 <div ref={valuesRef} className="max-w-7xl mx-auto px-6 lg:px-8 opacity-0">
                     <div className="text-center mb-20">
                         <h2 className="text-3xl md:text-4xl font-display font-bold text-slate-900">{t('about.leadership_title')}</h2>
