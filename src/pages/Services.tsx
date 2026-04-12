@@ -27,6 +27,7 @@ export default function Services() {
     const keywordRef = useReveal()
     const blogRef = useReveal()
     const marketingRef = useReveal()
+    const fundyRef = useReveal()
 
     const blogTopics = [
         { icon: '/image/ecommerce_icon.webp', name: t('services.blog_ecommerce'), desc: t('services.blog_ecommerce_desc') },
@@ -235,6 +236,85 @@ export default function Services() {
                                     </li>
                                 ))}
                             </ul>
+                        </div>
+                    </div>
+                </div>
+            <div className="section-divider" />
+
+            {/* Fundy */}
+            <section className="py-24 bg-slate-50/50 relative z-10">
+                <div ref={fundyRef} className="max-w-7xl mx-auto px-6 lg:px-8 opacity-0">
+                    <div className="grid lg:grid-cols-2 gap-16 items-center">
+                        <div>
+                            <span className="text-brand-500 font-medium text-sm uppercase tracking-widest">{t('services.s4_label')}</span>
+                            <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mt-3 mb-6">
+                                {t('services.s4_title')}
+                            </h2>
+                            <p className="text-slate-600 leading-relaxed mb-6" dangerouslySetInnerHTML={{ __html: t('services.s4_desc') }} />
+                            <ul className="space-y-3 mb-8">
+                                {[t('services.s4_f1'), t('services.s4_f2'), t('services.s4_f3'), t('services.s4_f4')].map((item) => (
+                                    <li key={item} className="flex items-center gap-3 text-slate-600 text-sm">
+                                        <svg className="w-5 h-5 text-brand-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                        </svg>
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
+                            <a
+                                href="https://fundy.ai.kr"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-brand-500 to-brand-400 text-white font-semibold shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 hover:scale-105 transition-all duration-300"
+                            >
+                                {t('services.s4_cta')}
+                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                            </a>
+                        </div>
+
+                        {/* Visual */}
+                        <div className="glass-card p-8 rounded-2xl border border-slate-200">
+                            <div className="space-y-4">
+                                <div className="flex items-center gap-3 p-4 rounded-xl bg-white border border-slate-100 shadow-sm">
+                                    <div className="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center text-brand-600">
+                                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </div>
+                                    <span className="text-slate-900 text-sm font-medium">{t('services.s4_mock_search')}</span>
+                                    <span className="ml-auto text-brand-600 text-xs font-bold bg-brand-50 px-3 py-1.5 rounded-lg cursor-pointer">{t('services.s4_mock_btn')}</span>
+                                </div>
+                                <div className="grid grid-cols-2 gap-3">
+                                    <div className="p-4 rounded-xl bg-white border border-slate-100 shadow-sm">
+                                        <p className="text-slate-500 text-xs mb-1">{t('services.s4_mock_volume')}</p>
+                                        <p className="text-slate-900 font-bold text-lg">Up to 100M</p>
+                                    </div>
+                                    <div className="p-4 rounded-xl bg-white border border-slate-100 shadow-sm">
+                                        <p className="text-slate-500 text-xs mb-1">{t('services.s4_mock_comp')}</p>
+                                        <p className="text-brand-600 font-bold text-lg">{t('services.s4_mock_comp_val')}</p>
+                                    </div>
+                                    <div className="p-4 rounded-xl bg-white border border-slate-100 shadow-sm">
+                                        <p className="text-slate-500 text-xs mb-1">{t('services.s4_mock_trend')}</p>
+                                        <p className="text-emerald-500 font-bold text-lg flex items-center gap-1">
+                                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            {t('services.s4_mock_trend_val')}
+                                        </p>
+                                    </div>
+                                    <div className="p-4 rounded-xl bg-white border border-slate-100 shadow-sm">
+                                        <p className="text-slate-500 text-xs mb-1">{t('services.s4_mock_opp')}</p>
+                                        <div className="flex items-center gap-2 mt-1">
+                                            <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+                                                <div className="h-full bg-brand-500 rounded-full" style={{ width: '95%' }}></div>
+                                            </div>
+                                            <span className="text-brand-600 font-bold text-sm">95%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
