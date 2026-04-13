@@ -239,6 +239,8 @@ export default function Services() {
                         </div>
                     </div>
                 </div>
+            </section>
+
             <div className="section-divider" />
 
             {/* Fundy */}
@@ -275,46 +277,16 @@ export default function Services() {
                         </div>
 
                         {/* Visual */}
-                        <div className="glass-card p-8 rounded-2xl border border-slate-200">
-                            <div className="space-y-4">
-                                <div className="flex items-center gap-3 p-4 rounded-xl bg-white border border-slate-100 shadow-sm">
-                                    <div className="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center text-brand-600">
-                                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </div>
-                                    <span className="text-slate-900 text-sm font-medium">{t('services.s4_mock_search')}</span>
-                                    <span className="ml-auto text-brand-600 text-xs font-bold bg-brand-50 px-3 py-1.5 rounded-lg cursor-pointer">{t('services.s4_mock_btn')}</span>
-                                </div>
-                                <div className="grid grid-cols-2 gap-3">
-                                    <div className="p-4 rounded-xl bg-white border border-slate-100 shadow-sm">
-                                        <p className="text-slate-500 text-xs mb-1">{t('services.s4_mock_volume')}</p>
-                                        <p className="text-slate-900 font-bold text-lg">Up to 100M</p>
-                                    </div>
-                                    <div className="p-4 rounded-xl bg-white border border-slate-100 shadow-sm">
-                                        <p className="text-slate-500 text-xs mb-1">{t('services.s4_mock_comp')}</p>
-                                        <p className="text-brand-600 font-bold text-lg">{t('services.s4_mock_comp_val')}</p>
-                                    </div>
-                                    <div className="p-4 rounded-xl bg-white border border-slate-100 shadow-sm">
-                                        <p className="text-slate-500 text-xs mb-1">{t('services.s4_mock_trend')}</p>
-                                        <p className="text-emerald-500 font-bold text-lg flex items-center gap-1">
-                                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                            </svg>
-                                            {t('services.s4_mock_trend_val')}
-                                        </p>
-                                    </div>
-                                    <div className="p-4 rounded-xl bg-white border border-slate-100 shadow-sm">
-                                        <p className="text-slate-500 text-xs mb-1">{t('services.s4_mock_opp')}</p>
-                                        <div className="flex items-center gap-2 mt-1">
-                                            <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
-                                                <div className="h-full bg-brand-500 rounded-full" style={{ width: '95%' }}></div>
-                                            </div>
-                                            <span className="text-brand-600 font-bold text-sm">95%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div className="relative rounded-2xl overflow-hidden border border-slate-200 shadow-xl bg-slate-100">
+                            <video 
+                                autoPlay 
+                                loop 
+                                muted 
+                                playsInline 
+                                className="w-full h-full object-cover"
+                            >
+                                <source src="/image/fundy_ai_14.04.2026.webm" type="video/webm" />
+                            </video>
                         </div>
                     </div>
                 </div>
