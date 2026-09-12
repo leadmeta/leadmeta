@@ -49,7 +49,7 @@ app.post('/api/contact', async (req, res) => {
         const typeLabel = typeLabels[type] || type || '미지정'
 
         const payload = {
-            from: 'LeadMeta Contact <onboarding@resend.dev>',
+            from: 'LeadMeta Contact <contact@leadmeta.xyz>',
             to: [RECIPIENT_EMAIL],
             subject: `[LeadMeta 문의] ${name}님의 문의 (${typeLabel})`,
             replyTo: email,

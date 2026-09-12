@@ -91,7 +91,7 @@ export async function onRequestPost({ request, env }) {
         `
 
         const resendPayload = {
-            from: 'LeadMeta Contact <onboarding@resend.dev>',
+            from: 'LeadMeta Contact <contact@leadmeta.xyz>',
             to: [recipientEmail],
             subject: `[LeadMeta 문의] ${name}님의 문의 (${typeLabel})`,
             reply_to: email,
