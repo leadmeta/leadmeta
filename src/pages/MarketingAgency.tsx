@@ -9,7 +9,7 @@ export default function MarketingAgency() {
             <div className="absolute inset-0 pointer-events-none">
                 <img
                     src="/image/abstract_blue_bg_1.webp"
-                    alt="Background"
+                    alt=""
                     className="absolute inset-0 w-full h-full object-cover opacity-[0.2]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/70 to-slate-50/90" />
@@ -77,21 +77,21 @@ export default function MarketingAgency() {
                         <h3 className="text-xl font-bold text-slate-900 mb-4">{t('marketing.revenue_title')}</h3>
                         <ul className="space-y-4">
                             <li className="flex items-start gap-3">
-                                <img src="/image/star_icon.webp" alt="Point" className="w-5 h-5 mt-0.5 object-contain" />
+                                <img src="/image/star_icon.webp" alt="" className="w-5 h-5 mt-0.5 object-contain" />
                                 <div>
                                     <strong className="text-slate-800 block text-sm">{t('marketing.rev1_title')}</strong>
                                     <span className="text-slate-600 text-sm">{t('marketing.rev1_desc')}</span>
                                 </div>
                             </li>
                             <li className="flex items-start gap-3">
-                                <img src="/image/star_icon.webp" alt="Point" className="w-5 h-5 mt-0.5 object-contain" />
+                                <img src="/image/star_icon.webp" alt="" className="w-5 h-5 mt-0.5 object-contain" />
                                 <div>
                                     <strong className="text-slate-800 block text-sm">{t('marketing.rev2_title')}</strong>
                                     <span className="text-slate-600 text-sm">{t('marketing.rev2_desc')}</span>
                                 </div>
                             </li>
                             <li className="flex items-start gap-3">
-                                <img src="/image/star_icon.webp" alt="Point" className="w-5 h-5 mt-0.5 object-contain" />
+                                <img src="/image/star_icon.webp" alt="" className="w-5 h-5 mt-0.5 object-contain" />
                                 <div>
                                     <strong className="text-slate-800 block text-sm">{t('marketing.rev3_title')}</strong>
                                     <span className="text-slate-600 text-sm">{t('marketing.rev3_desc')}</span>

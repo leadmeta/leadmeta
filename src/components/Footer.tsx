@@ -6,7 +6,7 @@ export default function Footer() {
 
     const footerLinks = {
         services: [
-            { label: '어바웃키워드', href: 'https://www.aboutkeyword.com', external: true },
+            { label: t('footer.brand_aboutkeyword'), href: 'https://www.aboutkeyword.com', external: true },
             { label: t('nav.blog'), to: '/services/blog-network' },
             { label: t('nav.marketing'), to: '/services/marketing-agency' },
         ],

@@ -6,7 +6,10 @@
         "contact": "문의하기",
         "marketing": "마케팅 대행",
         "blog": "블로그 네트워크",
-        "cta": "상담 시작하기"
+        "cta": "상담 시작하기",
+        "language_select": "언어 선택",
+        "menu_toggle": "메뉴 열기",
+        "lang_ko": "한국어"
     },
     "footer": {
         "description": "마케팅과 데이터의 융합. 디지털 세상에서 비즈니스의 성장을 이끕니다.",
@@ -15,6 +18,7 @@
         "legal": "법적 고지",
         "terms": "이용약관",
         "privacy": "개인정보처리방침",
+        "brand_aboutkeyword": "어바웃키워드",
         "rights": "All rights reserved.",
         "slogan": "마케팅과 데이터의 융합"
     },
@@ -46,6 +50,7 @@
         "service4_title": "AI 정책자금 매칭",
         "service4_subtitle": "펀디 (Fundy)",
         "service4_desc": "AI가 각종 지원 공고를 분석하여 알맞은 정책자금을 찾아주고, 스마트한 사업계획서 등록을 지원합니다.",
+        "services_eyebrow": "서비스 소개",
         "view_more": "자세히 보기",
         "cta_title": "비즈니스 성장을 함께 시작하세요",
         "cta_desc": "리드메타와 함께라면 데이터 기반의 정확한 마케팅 전략을 통해 비즈니스의 다음 단계로 나아갈 수 있습니다.",
@@ -180,8 +185,13 @@
         "attachment_desc": "이미지 파일(jpg, png, webp)만 첨부 가능하며, 최대 5MB까지 업로드할 수 있습니다.",
         "error_file_size": "파일 크기가 너무 큽니다 (최대 5MB).",
         "error_file_type": "지원하지 않는 파일 형식입니다.",
+        "attachment_preview": "첨부 이미지 미리보기",
         "btn_attach": "파일 첨부하기",
-        "submit": "문의 보내기"
+        "submit": "문의 보내기",
+        "submitting": "전송 중...",
+        "error_server": "서버와 연결할 수 없습니다. 잠시 후 다시 시도해 주세요.",
+        "error_submit": "전송에 실패했습니다.",
+        "error_generic": "오류가 발생했습니다. 다시 시도해 주세요."
     },
     "marketing": {
         "badge": "Performance",

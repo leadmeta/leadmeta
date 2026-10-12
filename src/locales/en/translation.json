@@ -6,7 +6,10 @@
         "contact": "Contact",
         "marketing": "Marketing Agency",
         "blog": "Blog Network",
-        "cta": "Get Started"
+        "cta": "Get Started",
+        "language_select": "Select language",
+        "menu_toggle": "Open menu",
+        "lang_ko": "한국어"
     },
     "footer": {
         "description": "Convergence of marketing and data. Leading business growth in the digital world.",
@@ -15,6 +18,7 @@
         "legal": "Legal",
         "terms": "Terms of Service",
         "privacy": "Privacy Policy",
+        "brand_aboutkeyword": "AboutKeyword",
         "rights": "All rights reserved.",
         "slogan": "Convergence of Marketing and Data"
     },
@@ -43,6 +47,10 @@
         "service3_title": "Ads & Marketing",
         "service3_subtitle": "Ads & Marketing",
         "service3_desc": "Accelerate business growth through data-driven marketing strategies and advertising services.",
+        "service4_title": "AI Policy Fund Matching",
+        "service4_subtitle": "Fundy",
+        "service4_desc": "AI analyzes various support announcements to find the right policy funds for your business and supports smart business plan registration.",
+        "services_eyebrow": "Our Services",
         "view_more": "Learn More",
         "cta_title": "Start Your Growth Today",
         "cta_desc": "With LeadMeta, you can take your business to the next level through data-driven precision marketing strategies.",
@@ -60,9 +68,12 @@
         "section2_title": "LeadMeta's Innovation Offers New Marketing Paradigms",
         "section2_desc": "Combining performance marketing with our proprietary blog network, we drive growth that maximizes ROI.",
         "section2_cta": "Discover Profit Optimization",
-        "section3_title": "Committed to the Continuous Growth of Our Clients",
-        "section3_desc": "We protect and amplify our partners' businesses through transparent data reporting and strictly performance-driven operations.",
-        "section3_cta": "See Our Actions in Detail",
+        "section3_title": "AI Policy Fund Matching for Business Success — Fundy",
+        "section3_desc": "AI analyzes complex government support announcements, matches them to your situation, and helps you write your business plan to support solid growth.",
+        "section3_cta": "Explore Fundy",
+        "section4_title": "Committed to the Continuous Growth of Our Clients",
+        "section4_desc": "We protect and amplify our partners' businesses through transparent data reporting and strictly performance-driven operations.",
+        "section4_cta": "See Our Actions in Detail",
         "leadership_title": "Core Values",
         "v1_title": "Data-Driven Responsibility",
         "v1_desc": "We deploy marketing strictly centered on statistics, never relying on intuition.",
@@ -174,8 +185,13 @@
         "attachment_desc": "Only image files (jpg, png, webp) are allowed, up to 5MB.",
         "error_file_size": "File size is too large (max 5MB).",
         "error_file_type": "Unsupported file format.",
+        "attachment_preview": "Attached image preview",
         "btn_attach": "Attach Files",
-        "submit": "Send Inquiry"
+        "submit": "Send Inquiry",
+        "submitting": "Sending...",
+        "error_server": "Cannot connect to the server. Please try again later.",
+        "error_submit": "Failed to send.",
+        "error_generic": "An error occurred. Please try again."
     },
     "marketing": {
         "badge": "Performance",

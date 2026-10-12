@@ -9,7 +9,7 @@ export default function BlogNetwork() {
             <div className="absolute inset-0 pointer-events-none">
                 <img
                     src="/image/abstract_blue_bg_2.webp"
-                    alt="Background"
+                    alt=""
                     className="absolute inset-0 w-full h-full object-cover opacity-[0.2]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/70 to-slate-50/90" />
@@ -79,7 +79,7 @@ export default function BlogNetwork() {
                     <div className="glass-card p-8 lg:col-span-2 border border-slate-200">
                         <div className="flex items-center gap-4 mb-6">
                             <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center p-2.5 overflow-hidden">
-                                <img src="/image/rocket_icon.webp" alt="Benefits" className="w-full h-full object-contain drop-shadow" />
+                                <img src="/image/rocket_icon.webp" alt="" className="w-full h-full object-contain drop-shadow" />
                             </div>
                             <h3 className="text-xl font-bold text-slate-900">{t('blognet.benefits_title')}</h3>
                         </div>

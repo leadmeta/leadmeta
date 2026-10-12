@@ -68,7 +68,7 @@ export default function About() {
                 <div className="absolute inset-0 bg-slate-50">
                     <img
                         src="/image/about_hero_bg.webp"
-                        alt="About Hero"
+                        alt=""
                         className="absolute inset-0 w-full h-full object-cover opacity-[0.25]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/70 to-slate-50/90" />
@@ -113,7 +113,7 @@ export default function About() {
             {/* Section 2 - Innovation */}
             <section className="py-32 relative overflow-hidden bg-slate-50">
                 <div className="absolute inset-0 opacity-[0.4]">
-                    <img src="/image/abstract_blue_bg_1.webp" alt="Innovation Background" className="w-full h-full object-cover" />
+                    <img src="/image/abstract_blue_bg_1.webp" alt="" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-white/80 backdrop-blur-sm" />
                 </div>
                 <div ref={section2Ref} className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 text-center opacity-0">

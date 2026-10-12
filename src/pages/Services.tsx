@@ -45,7 +45,7 @@ export default function Services() {
                 <div className="absolute inset-0 bg-slate-50">
                     <img
                         src="/image/services_hero_bg.webp"
-                        alt="Services Hero"
+                        alt=""
                         className="absolute inset-0 w-full h-full object-cover opacity-[0.2]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/70 to-slate-50/90" />

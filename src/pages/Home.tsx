@@ -92,7 +92,7 @@ export default function Home() {
                     {/* Hopeful Sky Background */}
                     <img
                         src="/image/hopeful_sky.webp"
-                        alt="Hopeful Sky"
+                        alt=""
                         className="absolute inset-0 w-full h-full object-cover opacity-[0.35]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/70 to-slate-50/90" />
@@ -198,7 +198,7 @@ export default function Home() {
             <section className="py-24 bg-slate-50/50 relative z-10">
                 <div ref={servicesRef} className="max-w-7xl mx-auto px-6 lg:px-8 opacity-0">
                     <div className="text-center mb-16">
-                        <span className="text-brand-500 font-medium text-sm uppercase tracking-widest">Our Services</span>
+                        <span className="text-brand-500 font-medium text-sm uppercase tracking-widest">{t('home.services_eyebrow')}</span>
                         <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mt-3">
                             {t('home.services_title')}
                         </h2>

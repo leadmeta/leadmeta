@@ -9,7 +9,7 @@ export default function Terms() {
                 <div className="absolute inset-0 bg-slate-50">
                     <img
                         src="/image/abstract_blue_bg_1.webp"
-                        alt="Background"
+                        alt=""
                         className="absolute inset-0 w-full h-full object-cover opacity-[0.1]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/70 to-slate-50/90" />

@@ -81,12 +81,12 @@ export default function Contact() {
             try {
                 data = await res.json()
             } catch (e) {
-                throw new Error('서버와 연결할 수 없습니다. 잠시 후 다시 시도해 주세요.')
+                throw new Error(t('contact.error_server'))
             }
 
             if (!res.ok || !data.success) {
-                let errorMessage = data?.error || '전송에 실패했습니다.'
-                if (errorMessage.includes('reply_to')) {
+                let errorMessage = t('contact.error_submit')
+                if (typeof data?.error === 'string' && data.error.includes('reply_to')) {
                     errorMessage = t('contact.error_invalid_email')
                 }
                 throw new Error(errorMessage)
@@ -94,7 +94,22 @@ export default function Contact() {
 
             setSubmitted(true)
         } catch (err) {
-            setError(err instanceof Error ? err.message : '오류가 발생했습니다. 다시 시도해 주세요.')
+            if (err instanceof Error) {
+                const known = [
+                    t('contact.error_server'),
+                    t('contact.error_submit'),
+                    t('contact.error_invalid_email'),
+                ]
+                if (err instanceof TypeError) {
+                    setError(t('contact.error_server'))
+                } else if (known.includes(err.message)) {
+                    setError(err.message)
+                } else {
+                    setError(t('contact.error_generic'))
+                }
+            } else {
+                setError(t('contact.error_generic'))
+            }
         } finally {
             setLoading(false)
         }
@@ -107,7 +122,7 @@ export default function Contact() {
                 <div className="absolute inset-0 bg-slate-50">
                     <img
                         src="/image/abstract_blue_bg_1.webp"
-                        alt="Contact Background"
+                        alt=""
                         className="absolute inset-0 w-full h-full object-cover opacity-[0.2]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/70 to-slate-50/90" />
@@ -302,7 +317,7 @@ export default function Contact() {
                                             <label className="block text-slate-700 text-sm font-medium mb-2">{t('contact.label_attachment')}</label>
                                             <div className="border border-brand-200 bg-brand-50/30 rounded-xl p-4 flex items-center gap-4">
                                                 <div className="w-16 h-16 rounded-lg bg-white border border-brand-100 overflow-hidden flex-shrink-0 shadow-sm relative group">
-                                                    <img src={`data:${attachment.type};base64,${attachment.content}`} alt="Preview" className="w-full h-full object-cover" />
+                                                    <img src={`data:${attachment.type};base64,${attachment.content}`} alt={t('contact.attachment_preview')} className="w-full h-full object-cover" />
                                                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                                         <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -344,7 +359,7 @@ export default function Contact() {
                                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                                                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                                                 </svg>
-                                                전송 중...
+                                                {t('contact.submitting')}
                                             </span>
                                         ) : (
                                             t('contact.submit')
