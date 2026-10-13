@@ -11,8 +11,8 @@ const PORT = process.env.PORT || 3001
 
 // ── Middleware ──────────────────────────────────
 app.use(cors())
-app.use(express.json({ limit: '50mb' }))
-app.use(express.urlencoded({ limit: '50mb', extended: true }))
+app.use(express.json({ limit: '10mb' }))
+app.use(express.urlencoded({ limit: '10mb', extended: true }))
 
 // ── Resend Setup ───────────────────────────────
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -39,6 +39,23 @@ app.post('/api/contact', async (req, res) => {
             })
         }
 
+        // Type safety + length caps (abuse / DoS guard)
+        if (typeof name !== 'string' || typeof email !== 'string' || typeof message !== 'string') {
+            return res.status(400).json({ success: false, error: '잘못된 입력 형식입니다.' })
+        }
+        if (name.length > 100 || email.length > 200 || message.length > 5000 ||
+            (company !== undefined && (typeof company !== 'string' || company.length > 200)) ||
+            (type !== undefined && (typeof type !== 'string' || type.length > 20))) {
+            return res.status(400).json({ success: false, error: '입력값이 허용 길이를 초과했습니다.' })
+        }
+        if (attachment !== undefined && attachment !== null) {
+            if (typeof attachment !== 'object' || typeof attachment.name !== 'string' ||
+                typeof attachment.content !== 'string' || attachment.name.length > 200 ||
+                attachment.content.length > 7000000) {
+                return res.status(400).json({ success: false, error: '첨부파일이 허용 한도를 초과했습니다.' })
+            }
+        }
+
         const typeLabels = {
             service: '서비스 문의',
             error: '오류 제보',
@@ -46,12 +63,14 @@ app.post('/api/contact', async (req, res) => {
             partner: '제휴 제안',
             etc: '기타'
         }
-        const typeLabel = typeLabels[type] || type || '미지정'
+        // Whitelist only — never echo raw user `type` into HTML/subject
+        const typeLabel = typeLabels[type] || '미지정'
+        const safeName = name.replace(/[\r\n]+/g, ' ').slice(0, 100)
 
         const payload = {
             from: 'LeadMeta Contact <contact@leadmeta.xyz>',
             to: [RECIPIENT_EMAIL],
-            subject: `[LeadMeta 문의] ${name}님의 문의 (${typeLabel})`,
+            subject: `[LeadMeta 문의] ${safeName}님의 문의 (${typeLabel})`,
             replyTo: email,
             html: `
                 <div style="font-family: 'Segoe UI', Tahoma, sans-serif; max-width: 600px; margin: 20px auto; background: #ffffff; color: #1e293b; padding: 40px; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
@@ -80,7 +99,7 @@ app.post('/api/contact', async (req, res) => {
                         ${attachment ? `
                         <tr>
                             <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; vertical-align: top; font-size: 14px;">첨부파일</td>
-                            <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #0f172a;">${attachment.name}</td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #0f172a;">${attachment ? escapeHtml(attachment.name) : ''}</td>
                         </tr>
                         ` : ''}
                     </table>

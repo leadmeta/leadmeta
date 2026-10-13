@@ -13,6 +13,40 @@ export async function onRequestPost({ request, env }) {
                 headers: { 'Content-Type': 'application/json' }
             })
         }
+        // Type safety + length caps (abuse / DoS guard)
+        if (typeof name !== 'string' || typeof email !== 'string' || typeof message !== 'string') {
+            return new Response(JSON.stringify({
+                success: false,
+                error: '잘못된 입력 형식입니다.',
+            }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            })
+        }
+        if (name.length > 100 || email.length > 200 || message.length > 5000 ||
+            (company !== undefined && (typeof company !== 'string' || company.length > 200)) ||
+            (type !== undefined && (typeof type !== 'string' || type.length > 20))) {
+            return new Response(JSON.stringify({
+                success: false,
+                error: '입력값이 허용 길이를 초과했습니다.',
+            }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            })
+        }
+        if (attachment !== undefined && attachment !== null) {
+            if (typeof attachment !== 'object' || typeof attachment.name !== 'string' ||
+                typeof attachment.content !== 'string' || attachment.name.length > 200 ||
+                attachment.content.length > 7000000) {
+                return new Response(JSON.stringify({
+                    success: false,
+                    error: '첨부파일이 허용 한도를 초과했습니다.',
+                }), {
+                    status: 400,
+                    headers: { 'Content-Type': 'application/json' }
+                })
+            }
+        }
         // Email format validation (simple regex)
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
         if (!emailPattern.test(email)) {
@@ -45,7 +79,9 @@ export async function onRequestPost({ request, env }) {
             partner: '제휴 제안',
             etc: '기타'
         }
-        const typeLabel = typeLabels[type] || type || '미지정'
+        // Whitelist only — never echo raw user `type` into HTML/subject
+        const typeLabel = typeLabels[type] || '미지정'
+        const safeName = name.replace(/[\r\n]+/g, ' ').slice(0, 100)
 
         const htmlContent = `
             <div style="font-family: 'Segoe UI', Tahoma, sans-serif; max-width: 600px; margin: 20px auto; background: #ffffff; color: #1e293b; padding: 40px; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
@@ -69,7 +105,7 @@ export async function onRequestPost({ request, env }) {
                     </tr>
                     <tr>
                         <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; vertical-align: top; font-size: 14px;">문의 유형</td>
-                        <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #0f172a; font-weight: 600;">${typeLabel}</td>
+                        <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #0f172a; font-weight: 600;">${escapeHtml(typeLabel)}</td>
                     </tr>
                     ${attachment ? `
                     <tr>
@@ -93,7 +129,7 @@ export async function onRequestPost({ request, env }) {
         const resendPayload = {
             from: 'LeadMeta Contact <contact@leadmeta.xyz>',
             to: [recipientEmail],
-            subject: `[LeadMeta 문의] ${name}님의 문의 (${typeLabel})`,
+            subject: `[LeadMeta 문의] ${safeName}님의 문의 (${typeLabel})`,
             reply_to: email,
             html: htmlContent
         }
@@ -148,7 +184,7 @@ export async function onRequestPost({ request, env }) {
     }
 }
 
-function escapeHtml(str) {
+export function escapeHtml(str) {
     if (typeof str !== 'string') return ''
     return str
         .replace(/&/g, '&amp;')
